@@ -1,0 +1,10 @@
+[Mon Aug 12 14:44:54 2024]게임 시작 시간
+[Mon Aug 12 14:44:54 2024]정답: 23
+[Mon Aug 12 14:44:56 2024]사용자가 입력한 숫자: 15
+[Mon Aug 12 14:44:56 2024]1th trial. Incorrect
+[Mon Aug 12 14:45:00 2024]사용자가 입력한 숫자: 30
+[Mon Aug 12 14:45:00 2024]2th trial. Incorrect
+[Mon Aug 12 14:45:02 2024]사용자가 입력한 숫자: 20
+[Mon Aug 12 14:45:02 2024]3th trial. Incorrect
+[Mon Aug 12 14:45:02 2024] 최대 허용 시도 횟수 초과
+[Mon Aug 12 14:45:02 2024] play time: 7.996412515640259
