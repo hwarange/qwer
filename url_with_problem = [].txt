@@ -1,0 +1,71 @@
+url_with_problem = []
+
+for url in tqdm(url_list):
+    response = requests.get(url)
+    press_id = '009'
+    article_id = url.split('/')[-1]
+
+    if response.status_code == 200 :
+        bs = BeautifulSoup(response.text, 'lxml')
+        
+    else:
+        url_with_problem.append(url)
+        continue
+        
+
+    times = bs.select('div.media_end_head_info_datestamp_bunch > span')
+    if times and len(times) == 2:
+        posting_time, modifying_time = [convert_to_datetime(time.text) for time in times]
+        
+    elif times and len(times) == 1:
+        posting_time = [convert_to_datetime(time.text) for time in times][0] #리스트로 데이터를 넣으려고 해서 문제가 발생
+        modifying_time = posting_time
+        
+    else:
+        url_with_problem.append(url)
+        continue
+
+    titles = bs.select('h2#title_area > span')
+    if title:
+        title = titles[0].text.replace('\'', '').replace('\"', '')
+    elif not title:
+        title = bs.select('h2.NewsEndMain_article_title__kqEzS')
+        title = titles[0].text.replace('\'', '').replace('\"', '')
+        
+    else:
+        url_with_problem.append(url)
+        continue
+            
+
+    reporter = bs.select('em.media_end_head_journalist_name')
+    if reporter:
+        reporter = reporter[0].text.split()[0]
+        print(reporter)
+        
+    else:
+        reporter =""
+        
+            
+
+    contents = bs.select('article#dic_area')
+    if not contents:
+        url_with_problem.append(url)
+        continue
+            
+    contents = contents[0].text.replace('\'', '').replace('\"', '')
+    
+
+    with psycopg2.connect(
+    host='localhost',
+    dbname='postgres',
+    user='postgres',
+    password ='1234',
+    port=5432,
+    ) as corn:
+        with corn.cursor() as cur:
+            try:
+                cur.execute(f"""INSERT INTO article VALUES ('{press_id}','{posting_time}', '{modifying_time}','{reporter}','{title}','{contents}','{article_id}')""")
+            except Exception:
+                url_with_problem.append(url)
+    
+    
