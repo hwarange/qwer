@@ -1,0 +1,17 @@
+{
+    "window_size": 10,
+    "seed": 0,
+    "embedding_dim": 128,
+    "vocab_size": 10000,
+    "batch_size": 1024,
+    "epochs": 100,
+    "learning_rate": 4e-3,    
+    "lstm_hidden_dim1": 256,
+    "lstm_hidden_dim2": 64,
+    "linear_hidden_dim1": 512,
+    "linear_hidden_dim2": 128,
+    "output_dim": 2,
+    "bidirectional": true,
+    "dropout_ratio": 0.3,
+    "use_batch_norm": true
+}

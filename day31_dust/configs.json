@@ -1,0 +1,12 @@
+{
+    "output_dim": 5,
+    "window_size": 10,
+    "seed": 0,
+    "batch_size": 256,       
+    "epochs": 1000,           
+    "learning_rate": 1e-3,    
+    "hidden_dim": 64,
+    "dropout_prob": 0.5,
+    "use_batch_norm": false
+
+}

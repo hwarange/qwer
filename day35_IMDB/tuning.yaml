@@ -1,0 +1,42 @@
+searchSpace:
+  batch_size:
+    _type: choice
+    _value: [16, 32, 64, 128]
+  window_size:
+    _type: randint
+    _value: [5, 10]
+  learning_rate:
+    _type: uniform             
+    _value: [0.001, 0.2]
+  dropout_ratio:
+    _type: uniform
+    _value: [0.1, 0.5]
+  embedding_dim:
+    _type: choice
+    _value: [16, 32, 64, 128, 256]
+  lstm_hidden_dim1:
+    _type: randint
+    _value: [256, 512]
+  lstm_hidden_dim2:
+    _type: randint
+    _value: [32, 64]
+  linear_hidden_dim1:
+    _type: randint
+    _value: [513, 1024]
+  linear_hidden_dim2:
+    _type: randint
+    _value: [65, 128]
+
+trial_command: python train.py
+trial_code_directory: .
+
+trial_concurrency: 4
+max_trial_number: 256
+
+tuner:
+  name: TPE
+  class_args:
+    optimize_mode: maximize
+
+training_service:
+  platform: local
